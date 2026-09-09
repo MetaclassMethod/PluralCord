@@ -18,7 +18,7 @@ We're sponsored by Demo Raccoon. Say hi!
 ![Demo raccoon](demo/raccoon.jpg)
 
 > [!NOTE]
-> I care about your privacy. That's why, the NSA and Department of Defense oversees the data I use from you.
+> I care about your privacy. That's why, the NSA and Department of Defense oversee ALL the data I use from you.
 > Jokes aside...
 > PluralCord only reads PluralKit data - it never changes your system, members, or proxy
 > settings. The *only* thing it writes is an edit, and that goes through PluralKit's own
