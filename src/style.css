@@ -146,3 +146,7 @@ li:has([data-pg-hidden]),
     white-space: pre-wrap;
     word-break: break-word;
 }
+
+.pg-pronouns {
+    white-space: nowrap;
+}

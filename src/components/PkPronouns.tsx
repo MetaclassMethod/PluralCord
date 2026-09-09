@@ -20,7 +20,7 @@ export function PkPronouns({ message }: { message: Message; }) {
 
     if (!showPronouns || !isResolved(profile)) return null;
 
-    const pronouns = profile.pronouns?.trim();
+    const pronouns = profile.pronouns?.replace(/\s+/g, " ").trim();
     if (!pronouns) return null;
 
     return (
@@ -28,7 +28,7 @@ export function PkPronouns({ message }: { message: Message; }) {
             {tooltipProps => (
                 <span
                     {...tooltipProps}
-                    className={classes(TimestampClasses.timestampInline, TimestampClasses.timestamp)}
+                    className={classes("pg-pronouns", TimestampClasses.timestampInline, TimestampClasses.timestamp)}
                 >
                     • {pronouns}
                 </span>
