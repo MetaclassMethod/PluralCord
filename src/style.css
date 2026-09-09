@@ -1,0 +1,101 @@
+.pg-tag {
+    margin-left: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pg-tag:hover {
+    filter: brightness(1.15);
+}
+
+.pg-tag:focus-visible {
+    outline: 2px solid var(--focus-primary, #00aff4);
+    outline-offset: 1px;
+}
+
+.pg-tag-dots {
+    display: inline-block;
+    width: 1.125rem;
+    height: 0.25rem;
+    vertical-align: middle;
+    background-image: radial-gradient(circle closest-side, currentcolor 90%, transparent);
+    background-size: 33.33% 100%;
+    background-repeat: repeat-x;
+    animation: pg-tag-dots 0.9s steps(4) infinite;
+}
+
+@keyframes pg-tag-dots {
+    from {
+        background-size: 33.33% 100%;
+    }
+
+    to {
+        background-size: 33.33% 20%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pg-tag-dots {
+        animation: none;
+        opacity: 0.6;
+    }
+}
+
+:is(h3, [class*="header_"], [class*="headerText"]):has(.pg-tag)
+    :is([class*="botTag"], [class*="botTagCozy"]):not(.pg-tag) {
+    display: none !important;
+}
+
+.pg-blocklist-section {
+    margin-bottom: 1rem;
+}
+
+.pg-blocklist-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 5px;
+    background: var(--background-secondary, #2b2d31);
+    margin-top: 0.35rem;
+}
+
+.pg-blocklist-name {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: var(--text-normal, #dbdee1);
+    font-weight: 500;
+}
+
+.pg-blocklist-meta {
+    color: var(--text-muted, #949ba4);
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.pg-blocklist-empty,
+.pg-blocklist-hint {
+    color: var(--text-muted, #949ba4);
+    font-size: 0.8125rem;
+}
+
+.pg-danger-button {
+    background-color: var(--button-danger-background, #d83c3e) !important;
+    color: var(--white-500, #fff) !important;
+}
+
+.pg-danger-button:hover {
+    background-color: var(--button-danger-background-hover, #a12d2f) !important;
+}
+
+.pg-danger-button:active {
+    background-color: var(--button-danger-background-active, #8f2325) !important;
+}
+
+li:has([data-pg-blocked]),
+[class*="messageListItem"]:has([data-pg-blocked]),
+[data-pg-blocked] {
+    display: none !important;
+}
