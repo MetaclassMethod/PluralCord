@@ -33,10 +33,10 @@ const onPreSend = (_channelId: string, messageObj: { content: string; }) => {
 };
 
 export default definePlugin({
-    name: "pluralgrace",
+    name: "PluralCord",
     description:
-        "PluralKit integration: shows member names, system tags and colours on proxied messages, and lets you edit them.",
-    authors: [{ name: "MetaclassMethod", id: 0n }],
+        "A custom PluralKit integration: shows member names, system tags and colours on proxied messages, and lets you edit them.",
+    authors: [{ name: "MetaclassMethod", id: 760441533022732318n }],
     tags: ["Appearance", "Chat"],
     settings,
 

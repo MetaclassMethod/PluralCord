@@ -45,10 +45,20 @@ export function memberNameForSender(senderId: string): string | null {
     return best?.name ?? null;
 }
 
-export function asMember<T extends { id?: string; }>(user: T, name: string): T {
+const NAME_FIELDS = new Set(["username", "globalName", "displayName", "nick"]);
+
+export function asMember<T extends object>(user: T, name: string): T {
     try {
-        const clone = Object.create(Object.getPrototypeOf(user));
-        return Object.assign(clone, user, { username: name, globalName: name });
+        return new Proxy(user, {
+            get(target, prop, receiver) {
+                if (typeof prop === "string" && NAME_FIELDS.has(prop)) {
+                    if (prop in target) return name;
+                }
+
+                const value = Reflect.get(target, prop, target);
+                return typeof value === "function" ? value.bind(target) : value;
+            }
+        });
     } catch {
         return user;
     }
