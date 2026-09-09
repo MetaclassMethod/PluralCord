@@ -6,6 +6,8 @@ This repository incorporates and adapts material from Pluralchum:
 | --- | --- | --- | --- |
 | [estroBiologist/pluralchum](https://github.com/estroBiologist/pluralchum) | [`v2.10.7`](https://github.com/estroBiologist/pluralchum/releases/tag/2.10.7) | PluralKit profile model and caching strategy, webhook-username / system-tag splitting, the contrast-test accessibility logic, the colour-preference model, and the approach of preserving Discord's original message header so profile popouts still anchor | [MIT](https://github.com/estroBiologist/pluralchum/blob/master/LICENSE.md) |
 
+We extend our thanks to all of the contributors of Pluralchum.
+
 ## Credits
 
 - **PluralCord** - [MetaclassMethod](https://github.com/MetaclassMethod); Port to Vencord, plus the blocking, mention-rewriting, pronoun, and message-log features.
