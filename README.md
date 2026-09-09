@@ -113,6 +113,9 @@ pnpm build
 
 ## Development
 
+<details>
+<summary>Building, the type shim, how the patches work, and differences from Pluralchum</summary>
+
 ```sh
 pnpm lint # ESLint
 pnpm typecheck # tsc against the local shim
@@ -127,8 +130,7 @@ pnpm sync # copy into a Vencord checkout
 > The authoritative check is `pnpm testTsc` from inside the Vencord checkout after a sync -
 > that one uses the genuine definitions and has caught shim mistakes more than once.
 
-<details>
-<summary>How the patches work</summary>
+### How the patches work
 
 None of the patch regexes are original. Each is modelled on a plugin shipping in Vencord
 itself, which is the best available evidence that it matches the current Discord build:
@@ -148,10 +150,7 @@ disable it.
 Vencord logs failed patches to the console at startup. `pnpm buildReporter` from the Vencord
 checkout reports them in bulk without opening the client.
 
-</details>
-
-<details>
-<summary>Differences from Pluralchum</summary>
+### Differences from Pluralchum
 
 The port is not line-for-line. Notable changes:
 
@@ -173,8 +172,6 @@ The port is not line-for-line. Notable changes:
   `botTagCozy_c19a55`, which break on most client updates. Ours borrows Discord's tag classes
   at runtime and only overrides the colours.
 
-</details>
-
 > [!CAUTION]
 > The plugin's `name` in [`src/index.tsx`](src/index.tsx) must stay a **literal string** and
 > the **first property** of `definePlugin({` - not even a comment may sit between them.
@@ -182,6 +179,8 @@ The port is not line-for-line. Notable changes:
 > and registers the native bridge under it. It must also match `PLUGIN_NAME` in
 > [`src/constants.ts`](src/constants.ts), which is what the bridge is looked up by at runtime;
 > `start()` logs an error if the two ever drift apart.
+
+</details>
 
 ---
 
