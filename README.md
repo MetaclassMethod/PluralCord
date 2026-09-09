@@ -28,8 +28,8 @@ We're sponsored by Demo Raccoon. Say hi!
 
 ## Features
 
-| | |
 | Feature | Description |
+| --- | --- |
 | **Member names & system tags** | Shown in place of the raw webhook username, each coloured by the member colour, the system colour, the sender's role colour, or left to the theme - configured independently for name and tag. |
 | **Per-server display names** | Split from the system tag appended to the webhook name. Falls back when a server tag override makes the split ambiguous. |
 | **A `PLURAL` tag** | Replaces Discord's `APP` tag, coloured by the system. Clicking it forces a refresh! |
