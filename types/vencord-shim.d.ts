@@ -189,6 +189,16 @@ declare module "@api/MessageEvents" {
         messageObj: MessageObject
     ) => void | { cancel: boolean; } | Promise<void | { cancel: boolean; }>;
 
+    export type MessageSendListener = (
+        channelId: string,
+        messageObj: MessageObject,
+        options: unknown,
+        props: unknown
+    ) => void | { cancel: boolean; } | Promise<void | { cancel: boolean; }>;
+
+    export function addMessagePreSendListener(listener: MessageSendListener): MessageSendListener;
+    export function removeMessagePreSendListener(listener: MessageSendListener): boolean;
+
     export function addMessagePreEditListener(listener: MessageEditListener): MessageEditListener;
     export function removeMessagePreEditListener(listener: MessageEditListener): boolean;
 }
@@ -264,6 +274,7 @@ declare module "@webpack/common" {
 
     export const UserStore: {
         getCurrentUser(): User | null;
+        getUser(userId: string): User | null;
     };
 
     export const Alerts: {
