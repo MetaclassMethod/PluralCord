@@ -94,8 +94,8 @@
     background-color: var(--button-danger-background-active, #8f2325) !important;
 }
 
-li:has([data-pg-blocked]),
-[class*="messageListItem"]:has([data-pg-blocked]),
-[data-pg-blocked] {
+li:has([data-pg-hidden]),
+[class*="messageListItem"]:has([data-pg-hidden]),
+[data-pg-hidden] {
     display: none !important;
 }
