@@ -21,7 +21,7 @@ import { useMessageProps } from "./colour";
 import { PkPronouns } from "./components/PkPronouns";
 import { ProxiedUsername, type UsernameProps } from "./components/ProxiedUsername";
 import { isEditable, onPreEdit, startEditing } from "./edit";
-import { injectMentionResults, rewriteMentions } from "./mentions";
+import { injectMentionResults, mentionUser, rewriteMentions } from "./mentions";
 import { isProxiedMessage, userHash } from "./pluralkit/identity";
 import { profileStore } from "./pluralkit/store";
 import { isResolved } from "./pluralkit/types";
@@ -63,6 +63,14 @@ export default definePlugin({
                 replace: "$self.injectMentionResults($1);$&"
             },
             predicate: () => settings.store.mentionProxies && settings.store.mentionAutocomplete
+        },
+        {
+            find: ".USER_MENTION)",
+            replacement: {
+                match: /user:(\i),guildId:/,
+                replace: "user:$self.mentionUser($1),guildId:"
+            },
+            predicate: () => settings.store.mentionMemberNames
         },
         {
             find: ".SEND_FAILED,",
@@ -139,5 +147,6 @@ export default definePlugin({
     }),
 
     injectMentionResults,
+    mentionUser,
     useMessageProps
 });

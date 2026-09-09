@@ -32,6 +32,39 @@ function escapeRegex(text: string): string {
     return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+export function memberNameForSender(senderId: string): string | null {
+    let best: { name: string; lastUsed: number; } | null = null;
+
+    for (const profile of profileStore.resolved()) {
+        if (profile.sender !== senderId || !profile.name) continue;
+
+        const lastUsed = profile.lastUsed ?? 0;
+        if (!best || lastUsed > best.lastUsed) best = { name: profile.name, lastUsed };
+    }
+
+    return best?.name ?? null;
+}
+
+export function asMember<T extends { id?: string; }>(user: T, name: string): T {
+    try {
+        const clone = Object.create(Object.getPrototypeOf(user));
+        return Object.assign(clone, user, { username: name, globalName: name });
+    } catch {
+        return user;
+    }
+}
+
+export function mentionUser<T extends { id?: string; }>(user: T): T {
+    try {
+        if (!user?.id) return user;
+
+        const name = memberNameForSender(user.id);
+        return name ? asMember(user, name) : user;
+    } catch {
+        return user;
+    }
+}
+
 export function rewriteMentions(content: string, members = mentionableMembers()): string {
     if (!content.includes("@")) return content;
 
@@ -70,7 +103,7 @@ export function injectMentionResults(state: AutocompleteState): void {
             if (users.some(user => (user as { id?: string; })?.id === senderId)) continue;
 
             const user = UserStore.getUser?.(senderId);
-            if (user) users.unshift(user);
+            if (user) users.unshift(asMember(user, name));
         }
     } catch {
         // suggestions should be treated as a convenience; never let this break the picker.
