@@ -1,7 +1,5 @@
 /*
- * pluralgrace, a Vencord userplugin for PluralKit
  * Copyright (c) 2026 MetaclassMethod
- * SPDX-License-Identifier: MIT
  */
 
 import stylistic from "@stylistic/eslint-plugin";
