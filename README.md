@@ -59,6 +59,7 @@ Then build Vencord as usual:
 ```sh
 cd /path/to/Vencord
 pnpm build
+pnpm inject
 ```
 
 > [!TIP]
