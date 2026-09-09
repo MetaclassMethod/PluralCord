@@ -251,7 +251,11 @@ declare module "@webpack/common" {
 
     export const MessageStore: {
         getMessage(channelId: string, messageId: string): Message | null;
-        getMessages(channelId: string): { toArray(): Message[]; };
+        getMessages(channelId: string): {
+            some(predicate: (message: Message, index: number, array: Message[]) => unknown): boolean;
+            forEach(callback: (message: Message, index: number, array: Message[]) => void): void;
+            get(messageId: string): Message | undefined;
+        } | null;
     };
 
     export const MessageActions: {
