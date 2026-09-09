@@ -16,4 +16,4 @@ const destination = join(vencordPath, "src", "userplugins", "pluralgrace");
 await rm(destination, { recursive: true, force: true });
 await cp(join(repoRoot, "src"), destination, { recursive: true });
 
-console.log(`pluralgrace -> ${destination}`);
+console.log(`PluralCord -> ${destination}`);
