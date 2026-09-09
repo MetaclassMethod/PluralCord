@@ -39,7 +39,7 @@ export function ProxiedUsername({ message, channel, withMentionPrefix, isReplied
         : { name: rawUsername(message.author), tag: "" };
 
     const nameColour = resolved ? resolveColour(memberColour, profile, channel?.guild_id, true) : null;
-    const tagColourValue = resolved ? resolveColour(tagColour, profile, channel?.guild_id, false) : null;
+    const tagColourValue = resolved ? resolveColour(tagColour, profile, channel?.guild_id, true) : null;
 
     return (
         <>

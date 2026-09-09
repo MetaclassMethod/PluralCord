@@ -20,6 +20,7 @@ class ProfileStore {
     private listeners = new Set<Listener>();
 
     private inFlight = new Map<string, Promise<void>>();
+    private lastMessage = new Map<string, Message>();
     private saveTimer: ReturnType<typeof setTimeout> | null = null;
     private loaded = false;
 
@@ -55,11 +56,15 @@ class ProfileStore {
         const existing = this.profiles.get(hash);
         if (!existing) return;
         this.set(hash, { ...existing, status: ProfileStatus.Stale });
+
+        const message = this.lastMessage.get(hash);
+        if (message) this.ensure(message);
     }
 
     async clear(): Promise<void> {
         this.profiles.clear();
         this.inFlight.clear();
+        this.lastMessage.clear();
         this.emit("*", null);
         await DataStore.del(STORE_KEY);
     }
@@ -93,6 +98,7 @@ class ProfileStore {
         if (!this.loaded || !isProxiedMessage(message)) return;
 
         const hash = userHash(message);
+        this.lastMessage.set(hash, message);
         const existing = this.profiles.get(hash);
 
         const needsFetch = !existing || existing.status === ProfileStatus.Stale;
