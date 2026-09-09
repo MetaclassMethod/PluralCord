@@ -1,21 +1,36 @@
+/*
+ * Copyright (c) 2026 MetaclassMethod
+ */
+
 import "./style.css";
 
-import { addMessagePreEditListener, removeMessagePreEditListener } from "@api/MessageEvents";
+import {
+    addMessagePreEditListener,
+    addMessagePreSendListener,
+    removeMessagePreEditListener,
+    removeMessagePreSendListener
+} from "@api/MessageEvents";
 import ErrorBoundary from "@components/ErrorBoundary";
 import definePlugin from "@utils/types";
 import type { Message } from "@vencord/discord-types";
 import { Menu } from "@webpack/common";
 
-import { blocklist } from "./blocklist";
 import { confirmBlock } from "./block";
-import { useMessageStyle } from "./colour";
+import { blocklist } from "./blocklist";
+import { useMessageProps } from "./colour";
 import { PkPronouns } from "./components/PkPronouns";
 import { ProxiedUsername, type UsernameProps } from "./components/ProxiedUsername";
 import { isEditable, onPreEdit, startEditing } from "./edit";
+import { injectMentionResults, rewriteMentions } from "./mentions";
 import { isProxiedMessage, userHash } from "./pluralkit/identity";
 import { profileStore } from "./pluralkit/store";
 import { isResolved } from "./pluralkit/types";
 import { settings } from "./settings";
+
+const onPreSend = (_channelId: string, messageObj: { content: string; }) => {
+    if (!settings.store.mentionProxies) return;
+    messageObj.content = rewriteMentions(messageObj.content);
+};
 
 export default definePlugin({
     name: "pluralgrace",
@@ -42,10 +57,18 @@ export default definePlugin({
             predicate: () => settings.store.showPronouns
         },
         {
+            find: "renderResults({results:",
+            replacement: {
+                match: /let \i=.{1,100}renderResults\({results:(\i)\.query\.results,/,
+                replace: "$self.injectMentionResults($1);$&"
+            },
+            predicate: () => settings.store.mentionProxies && settings.store.mentionAutocomplete
+        },
+        {
             find: ".SEND_FAILED,",
             replacement: {
                 match: /(?<=\]:(\i)\.isUnsupported.{0,50}?,)(?=children:\[)/,
-                replace: "style:$self.useMessageStyle($1),"
+                replace: "...$self.useMessageProps($1),"
             }
         }
     ],
@@ -96,10 +119,12 @@ export default definePlugin({
     async start() {
         await Promise.all([profileStore.load(), blocklist.load()]);
         addMessagePreEditListener(onPreEdit);
+        addMessagePreSendListener(onPreSend);
     },
 
     async stop() {
         removeMessagePreEditListener(onPreEdit);
+        removeMessagePreSendListener(onPreSend);
         await profileStore.flush();
     },
 
@@ -113,5 +138,6 @@ export default definePlugin({
         noop: true
     }),
 
-    useMessageStyle
+    injectMentionResults,
+    useMessageProps
 });
