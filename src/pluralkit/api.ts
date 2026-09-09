@@ -4,18 +4,19 @@
 
 import type { PluginNative } from "@utils/types";
 
+import { PLUGIN_NAME } from "../constants";
 import type { PkFetchResult } from "../native";
 import { PkMessageResponse, Profile, ProfileStatus } from "./types";
 
 type PkNative = PluginNative<typeof import("../native")>;
 
 function getNative(): PkNative {
-    const native = VencordNative.pluginHelpers?.pluralgrace as PkNative | undefined;
+    const native = VencordNative.pluginHelpers?.[PLUGIN_NAME] as PkNative | undefined;
 
     if (!native?.fetchPkMessage) {
         throw new PkApiError(
             -1,
-            "pluralgrace's native bridge is not registered. The main process is running an older " +
+            `${PLUGIN_NAME}'s native bridge is not registered. The main process is running an older ` +
             "build. Please fully quit Discord and reopen it (a Ctrl+R reload only refreshes the renderer)."
         );
     }
