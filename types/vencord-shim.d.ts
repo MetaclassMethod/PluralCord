@@ -218,6 +218,17 @@ declare module "@utils/discord" {
     export function getIntlMessage(key: string, values?: Record<string, unknown>): string;
 }
 
+declare module "@utils/Logger" {
+    export class Logger {
+        constructor(name: string, color?: string);
+        log(...args: unknown[]): void;
+        info(...args: unknown[]): void;
+        warn(...args: unknown[]): void;
+        error(...args: unknown[]): void;
+        debug(...args: unknown[]): void;
+    }
+}
+
 declare module "@utils/misc" {
     export function classes(...classNames: (string | null | undefined | false)[]): string;
 }
