@@ -27,8 +27,15 @@ export function PkTag({ hash, profile }: { hash: string; profile: Profile; }) {
     const base = (isResolved(profile) && (profile.systemColour ?? profile.colour)) || FALLBACK;
     const background = adjustForLegibility(base, TEXT_COLOUR, tagLegibility);
 
+    const refresh = "Click to refresh PluralKit data";
+    let tooltip = pending ? "Fetching PluralKit data…" : refresh;
+    if (!pending && isResolved(profile) && profile.name) {
+        const system = profile.systemName ? `${profile.systemName} system` : "system";
+        tooltip = `This is part of ${profile.name}'s ${system}. ${refresh}`;
+    }
+
     return (
-        <Tooltip text={pending ? "Fetching PluralKit data…" : "Click to refresh PluralKit data"}>
+        <Tooltip text={tooltip}>
             {tooltipProps => (
                 <span
                     {...tooltipProps}
