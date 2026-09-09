@@ -1,1 +1,1 @@
-Please immediately report all security issues to [contact@metaclassmethod.dev](mailto:contact@metaclassmethod.dev)
+Please immediately report all security issues to [contact@metaclassmethod.dev](mailto:contact@metaclassmethod.dev) or to [MetaclassMethod on Discord](https://discord.com/users/760441533022732318)
