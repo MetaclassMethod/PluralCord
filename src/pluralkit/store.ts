@@ -6,7 +6,7 @@ import * as DataStore from "@api/DataStore";
 import type { Message } from "@vencord/discord-types";
 
 import { fetchProfileByMessage } from "./api";
-import { isProxiedMessage, rawUsername, userHash } from "./identity";
+import { isProxiedMessage, profileMatchKey, rawUsername, userHash } from "./identity";
 import { isResolved, Profile, ProfileStatus, ResolvedProfile } from "./types";
 
 const STORE_KEY = "pluralgrace-profiles";
@@ -40,6 +40,11 @@ class ProfileStore {
 
     resolved(): ResolvedProfile[] {
         return [...this.profiles.values()].filter(isResolved);
+    }
+
+    findByUser(user: { username: string; avatar: string | null; }): ResolvedProfile | null {
+        const key = profileMatchKey(user);
+        return this.resolved().find(profile => profile.matchKey === key) ?? null;
     }
 
     get(hash: string): Profile | null {
@@ -121,6 +126,7 @@ class ProfileStore {
     private async fetch(hash: string, message: Message): Promise<void> {
         try {
             const profile = await fetchProfileByMessage(message.id);
+            profile.matchKey = profileMatchKey(message.author);
             this.set(hash, profile);
         } catch (err) {
             console.error(`[pluralgrace] lookup failed for ${rawUsername(message.author)} (${hash})`, err);

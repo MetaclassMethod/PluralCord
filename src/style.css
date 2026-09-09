@@ -99,3 +99,50 @@ li:has([data-pg-hidden]),
 [data-pg-hidden] {
     display: none !important;
 }
+
+.pg-profile {
+    padding: 0 12px 12px;
+}
+
+.pg-profile-divider {
+    margin: 8px 0 12px;
+}
+
+.pg-profile-title {
+    margin-bottom: 6px;
+    color: var(--header-secondary, #b5bac1);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.pg-profile-banner {
+    display: block;
+    width: 100%;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.pg-profile-row {
+    color: var(--text-normal, #dbdee1);
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+}
+
+.pg-profile-label {
+    color: var(--text-muted, #949ba4);
+}
+
+.pg-profile-tag {
+    color: var(--text-muted, #949ba4);
+}
+
+.pg-profile-bio {
+    color: var(--text-normal, #dbdee1);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}

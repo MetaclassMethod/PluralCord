@@ -46,6 +46,8 @@ export interface Profile {
     systemId?: string;
     sender?: string;
 
+    matchKey?: string;
+
     name?: string;
     systemName?: string | null;
     tag?: string | null;

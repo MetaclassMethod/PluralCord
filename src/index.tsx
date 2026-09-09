@@ -19,6 +19,7 @@ import { Menu } from "@webpack/common";
 import { confirmBlock } from "./block";
 import { blocklist } from "./blocklist";
 import { useMessageProps } from "./colour";
+import { PkProfileSection } from "./components/PkProfileSection";
 import { PkPronouns } from "./components/PkPronouns";
 import { ProxiedUsername, type UsernameProps } from "./components/ProxiedUsername";
 import { PLUGIN_NAME } from "./constants";
@@ -80,6 +81,14 @@ export default definePlugin({
                 match: /(?<=\]:(\i)\.isUnsupported.{0,50}?,)(?=children:\[)/,
                 replace: "...$self.useMessageProps($1),"
             }
+        },
+        {
+            find: '"UserProfilePopout");',
+            replacement: {
+                match: /(?<=userId:\i\.id,guild:\i\}\)(?:,\i(?:\.\i)*\(arguments\[0\]\))*)(?=\])/,
+                replace: ",$self.profileSection(arguments[0])"
+            },
+            predicate: () => settings.store.showProfileInfo
         }
     ],
 
@@ -153,6 +162,11 @@ export default definePlugin({
     renderPronouns: ErrorBoundary.wrap(({ message }: { message: Message; }) => <PkPronouns message={message} />, {
         noop: true
     }),
+
+    profileSection: ErrorBoundary.wrap(
+        (props: { user?: import("@vencord/discord-types").User; }) => <PkProfileSection user={props.user} />,
+        { noop: true }
+    ),
 
     injectMentionResults,
     mentionUser,

@@ -160,6 +160,12 @@ declare module "@components/Paragraph" {
     export function Paragraph(props: ComponentPropsWithoutRef<"p">): JSX.Element;
 }
 
+declare module "@components/Divider" {
+    import type { ComponentPropsWithoutRef } from "react";
+
+    export function Divider(props: ComponentPropsWithoutRef<"hr">): JSX.Element;
+}
+
 declare module "@api/DataStore" {
     export function get<T = unknown>(key: string): Promise<T | undefined>;
     export function set<T = unknown>(key: string, value: T): Promise<void>;

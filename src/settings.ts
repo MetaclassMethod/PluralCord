@@ -58,6 +58,11 @@ export const settings = definePluginSettings({
         description: "Show the member's pronouns next to the timestamp. Don't worry, this works even with UserMessagePronouns enabled!",
         default: true
     },
+    showProfileInfo: {
+        type: OptionType.BOOLEAN,
+        description: "Add a PluralKit section (banner, system, bio) to a proxied member's profile popout",
+        default: true
+    },
 
     contrastTest: {
         type: OptionType.BOOLEAN,
