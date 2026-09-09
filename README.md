@@ -4,6 +4,8 @@
 
 A work by [MetaclassMethod](https://github.com/MetaclassMethod)
 
+---
+
 PluralKit integration for [Vencord](https://github.com/Vendicated/Vencord). It is a port of
 [Pluralchum](https://github.com/estroBiologist/pluralchum), which does the same job for
 BetterDiscord.
