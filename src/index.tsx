@@ -11,6 +11,7 @@ import {
     removeMessagePreSendListener
 } from "@api/MessageEvents";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import type { Message } from "@vencord/discord-types";
 import { Menu } from "@webpack/common";
@@ -20,6 +21,7 @@ import { blocklist } from "./blocklist";
 import { useMessageProps } from "./colour";
 import { PkPronouns } from "./components/PkPronouns";
 import { ProxiedUsername, type UsernameProps } from "./components/ProxiedUsername";
+import { PLUGIN_NAME } from "./constants";
 import { isEditable, onPreEdit, startEditing } from "./edit";
 import { injectMentionResults, mentionUser, rewriteMentions } from "./mentions";
 import { isProxiedMessage, userHash } from "./pluralkit/identity";
@@ -125,6 +127,12 @@ export default definePlugin({
     },
 
     async start() {
+        if (this.name !== PLUGIN_NAME) {
+            new Logger(this.name).error(
+                `Plugin ver "${this.name}" does not match PLUGIN_NAME "${PLUGIN_NAME}" in constants.ts. Please report this!`
+            );
+        }
+
         await Promise.all([profileStore.load(), blocklist.load()]);
         addMessagePreEditListener(onPreEdit);
         addMessagePreSendListener(onPreSend);
