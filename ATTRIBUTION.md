@@ -9,4 +9,4 @@ This repository incorporates and adapts material from Pluralchum:
 ## Credits
 
 - **PluralCord** - [MetaclassMethod](https://github.com/MetaclassMethod). Port to Vencord, plus the blocking, mention-rewriting, pronoun, and message-log features.
-- **Concept** - [PolarisWasInDenial](https://github.com/PolarisWasInDenial). Proposed the project and its original direction, very kindly helped me out the entire way! Most of the credit goes to them.
+- **PluralCord** - [PolarisWasInDenial](https://github.com/PolarisWasInDenial). Proposed the project and its original direction, very kindly helped me out the entire way! Most of the credit goes to them.
