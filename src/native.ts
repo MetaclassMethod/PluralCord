@@ -5,7 +5,7 @@
 import type { IpcMainInvokeEvent } from "electron";
 
 const BASE_ENDPOINT = "https://api.pluralkit.me/v2";
-const USER_AGENT = "pluralgrace (github.com/MetaclassMethod/pluralgrace)";
+const USER_AGENT = "PluralCord (github.com/MetaclassMethod/pluralgrace)";
 
 export interface PkFetchResult {
     status: number;
