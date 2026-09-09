@@ -12,7 +12,8 @@
     "scripts": {
         "lint": "eslint",
         "lint:fix": "eslint --fix",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "sync": "node scripts/sync.mjs"
     },
     "devDependencies": {
         "@stylistic/eslint-plugin": "^3.1.0",
