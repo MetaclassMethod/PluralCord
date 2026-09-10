@@ -47,6 +47,8 @@ We're sponsored by Demo Raccoon. Say hi!
 > [!IMPORTANT]
 > PluralCord is a **userplugin**. It has to be built into Vencord from source - you cannot
 > install it from the plugin list.
+>
+> For instructions on *how to build Vencord from source*, please follow the guide located [here](https://docs.vencord.dev/installing/). The following tutorial assumes that you have already completed [installing Vencord's dependencies](https://docs.vencord.dev/installing/#installing-dependencies).
 
 ```sh
 pnpm install
